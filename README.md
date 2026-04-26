@@ -6,6 +6,18 @@ This project simulates a content-based music recommendation engine in Python. Gi
 
 The goal is to understand how real platforms like Spotify translate raw data (song attributes + listener preferences) into ranked suggestions, and to identify where simple algorithms succeed and where they introduce bias.
 
+## Current Capabilities
+
+- Multi-source RAG explanations with source citations.
+- AI DJ planner-executor-evaluator workflow with saved trace output.
+- Specialized `vinyl_historian` persona mode with measurable comparison artifacts.
+- Reliability scoring, warning surfacing, graceful fallback behavior, and per-run diagnostics.
+- Automated harness coverage for happy-path, contradictory, invalid-input, retrieval-failure, and empty-catalog scenarios.
+
+## System Architecture
+
+![System architecture](assets/system-architecture.png)
+
 ---
 
 ## How The System Works
@@ -94,11 +106,27 @@ flowchart TD
    python -m src.main
    ```
 
+4. Run the automated reliability harness:
+
+   ```bash
+   python -m scripts.test_harness
+   ```
+
 ### Running Tests
 
 ```bash
-pytest
+python -m pytest -q
 ```
+
+### Generated Artifacts
+
+Running the app and harness writes the following reviewer-facing outputs to `outputs/`:
+
+- `agent_trace_demo.json`
+- `reliability_demo.json`
+- `specialization_demo.json`
+- `test_harness_results.json`
+- `test_harness_summary.md`
 
 ---
 

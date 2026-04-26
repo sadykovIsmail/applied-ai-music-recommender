@@ -1,0 +1,86 @@
+{
+  "summary": {
+    "scenario_count": 5,
+    "passed": 5,
+    "failed": 0,
+    "average_confidence": 0.646
+  },
+  "scenarios": [
+    {
+      "name": "happy_path_lofi",
+      "status": "pass",
+      "latency_ms": 1.01,
+      "confidence_score": 0.841,
+      "warnings": [],
+      "fallback_used": false,
+      "quality_checks": {
+        "has_output": true,
+        "confidence_reported": true,
+        "fallback_expectation_met": true,
+        "status_is_graceful": true
+      }
+    },
+    {
+      "name": "contradictory_preferences",
+      "status": "pass",
+      "latency_ms": 0.85,
+      "confidence_score": 0.673,
+      "warnings": [],
+      "fallback_used": false,
+      "quality_checks": {
+        "has_output": true,
+        "confidence_reported": true,
+        "fallback_expectation_met": true,
+        "status_is_graceful": true
+      }
+    },
+    {
+      "name": "invalid_energy_input",
+      "status": "pass",
+      "latency_ms": 0.77,
+      "confidence_score": 0.758,
+      "warnings": [
+        "Invalid energy value received; defaulted to 0.50."
+      ],
+      "fallback_used": false,
+      "quality_checks": {
+        "has_output": true,
+        "confidence_reported": true,
+        "fallback_expectation_met": true,
+        "status_is_graceful": true
+      }
+    },
+    {
+      "name": "retrieval_failure",
+      "status": "pass",
+      "latency_ms": 0.13,
+      "confidence_score": 0.625,
+      "warnings": [
+        "Retrieval failure encountered; continuing with local ranking only. (simulated retrieval outage)"
+      ],
+      "fallback_used": false,
+      "quality_checks": {
+        "has_output": true,
+        "confidence_reported": true,
+        "fallback_expectation_met": true,
+        "status_is_graceful": true
+      }
+    },
+    {
+      "name": "empty_catalog",
+      "status": "pass",
+      "latency_ms": 0.08,
+      "confidence_score": 0.333,
+      "warnings": [
+        "Song catalog is empty; no ranked recommendations are available."
+      ],
+      "fallback_used": true,
+      "quality_checks": {
+        "has_output": true,
+        "confidence_reported": true,
+        "fallback_expectation_met": true,
+        "status_is_graceful": true
+      }
+    }
+  ]
+}

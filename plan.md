@@ -2,11 +2,19 @@
 
 ## Project Goal
 - [ ] Deliver a production-style Applied AI system that exceeds baseline requirements by implementing:
-- [ ] Feature 1: RAG + RAG Enhancement (stretch)
-- [ ] Feature 2: Agentic Workflow + Enhancement (stretch)
-- [ ] Feature 3: Specialization + Enhancement (stretch)
-- [ ] Feature 4: Reliability System + Test Harness (stretch)
+- [x] Feature 1: RAG + RAG Enhancement (stretch)
+- [x] Feature 2: Agentic Workflow + Enhancement (stretch)
+- [x] Feature 3: Specialization + Enhancement (stretch)
+- [x] Feature 4: Reliability System + Test Harness (stretch)
 - [ ] Strong architecture artifacts, complete docs, and final Loom demo
+
+## Current Implementation Status
+- [x] Feature 1 is implemented with multi-source retrieval and measurable citation-diversity gains.
+- [x] Feature 2 is implemented with planner-executor-evaluator behavior, revision logic, and saved trace output.
+- [x] Feature 3 is implemented with standard vs specialized persona comparison and measurable schema gains.
+- [x] Feature 4 is implemented with graceful degradation, confidence diagnostics, low-confidence fallback, and automated harness reports.
+- [x] Mermaid architecture source and exported PNG are both present in `assets/`.
+- [ ] Final Loom recording and last-pass polish remain external/manual deliverables.
 
 ## Success Targets (100%+)
 - [ ] All required features implemented and demonstrated end-to-end
@@ -208,8 +216,8 @@ Acceptance criteria (required)
 - [ ] `outputs/test_harness_summary.md`
 
 Stretch acceptance criteria
-- [ ] Harness executes with one command and produces score summary
-- [ ] Summary included in README testing section
+- [x] Harness executes with one command and produces score summary
+- [x] Summary included in README testing section
 
 ---
 
@@ -243,9 +251,9 @@ flowchart LR
 ```
 
 ### 5.2 Export Assets
-- [ ] Export Mermaid diagram to PNG
-- [ ] Save in `assets/system-architecture.png`
-- [ ] Reference PNG in README
+- [x] Export Mermaid diagram to PNG
+- [x] Save in `assets/system-architecture.png`
+- [x] Reference PNG in README
 
 Acceptance criteria
 - [ ] Diagram is present in both source form (Mermaid) and PNG asset
