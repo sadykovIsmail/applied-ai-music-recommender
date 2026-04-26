@@ -3,8 +3,12 @@ from src.showcase import (
     ensure_showcase_artifacts,
     get_profile,
     harness_rows,
+    playlist_rows,
     profile_names,
     refresh_showcase_artifacts,
+    run_live_agent,
+    run_live_profile,
+    trace_rows,
 )
 
 
@@ -36,3 +40,30 @@ def test_get_profile_and_harness_rows_expose_dashboard_data():
     assert profile["profile_name"] == name
     assert "diagnostics" in profile
     assert any(row["scenario"] == "happy_path_lofi" for row in rows)
+
+
+def test_run_live_profile_returns_grounded_recommendations():
+    session = run_live_profile(
+        profile_name="Live Lofi",
+        prefs={"genre": "lofi", "mood": "chill", "energy": 0.38},
+        mode="vinyl_historian",
+        use_few_shot=True,
+    )
+
+    assert len(session.recommendations) == 5
+    assert "VINYL HISTORIAN" in session.specialized_text
+    assert session.diagnostics.confidence_score > 0.0
+
+
+def test_run_live_agent_exposes_playlist_and_trace_rows():
+    result = run_live_agent(
+        user_intent={"genre": "rock", "mood": "intense", "energy": 0.92},
+        playlist_size=5,
+    )
+
+    playlist = playlist_rows(result)
+    trace = trace_rows(result)
+
+    assert len(playlist) == 5
+    assert len(trace) >= 3
+    assert any(step["tool"] == "planner" for step in trace)

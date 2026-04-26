@@ -1,9 +1,15 @@
 import json
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List
 
 from scripts.test_harness import run_harness
 from src.main import run_demo
+from src.agent import AIDJAgent
+from src.recommender import load_songs
+from src.reliability import ReliableRecommendationRunner
+from src.retrieval import MusicContextRetriever
+from src.specialization import MusicResponseSpecializer
 
 
 def ensure_showcase_artifacts(output_dir: str = "outputs") -> Dict[str, Any]:
@@ -90,6 +96,106 @@ def harness_rows(payload: Dict[str, Any]) -> List[Dict[str, Any]]:
                 "latency_ms": scenario["latency_ms"],
                 "fallback_used": scenario["fallback_used"],
                 "warnings": " | ".join(scenario["warnings"]) if scenario["warnings"] else "",
+            }
+        )
+    return rows
+
+
+def preset_profiles() -> List[Dict[str, Any]]:
+    return [
+        {
+            "name": "High-Energy Pop Fan",
+            "prefs": {"genre": "pop", "mood": "happy", "energy": 0.85},
+        },
+        {
+            "name": "Chill Lofi Listener",
+            "prefs": {"genre": "lofi", "mood": "chill", "energy": 0.38},
+        },
+        {
+            "name": "Deep Intense Rock",
+            "prefs": {"genre": "rock", "mood": "intense", "energy": 0.92},
+        },
+        {
+            "name": "Contradictory Edge Case",
+            "prefs": {"genre": "ambient", "mood": "sad", "energy": 0.90},
+        },
+    ]
+
+
+@lru_cache(maxsize=1)
+def get_runtime() -> Dict[str, Any]:
+    songs = load_songs("data/songs.csv")
+    retriever = MusicContextRetriever.from_multi_source(
+        songs=songs,
+        text_sources=[
+            ("data/artist_context.md", "artist_notes", 0.9),
+            ("data/genre_notes.md", "genre_notes", 0.8),
+        ],
+    )
+    specializer = MusicResponseSpecializer()
+    runner = ReliableRecommendationRunner(
+        songs=songs,
+        retriever=retriever,
+        specializer=specializer,
+    )
+    agent = AIDJAgent(songs=songs, retriever=retriever)
+    return {
+        "songs": songs,
+        "retriever": retriever,
+        "specializer": specializer,
+        "runner": runner,
+        "agent": agent,
+    }
+
+
+def run_live_profile(
+    profile_name: str,
+    prefs: Dict[str, Any],
+    mode: str = "vinyl_historian",
+    use_few_shot: bool = True,
+) -> Any:
+    runtime = get_runtime()
+    return runtime["runner"].run(
+        profile_name=profile_name,
+        user_prefs=prefs,
+        mode=mode,
+        use_few_shot=use_few_shot,
+        k=5,
+        context_k=2,
+    )
+
+
+def run_live_agent(user_intent: Dict[str, Any], playlist_size: int = 5) -> Any:
+    runtime = get_runtime()
+    return runtime["agent"].run(user_intent=user_intent, playlist_size=playlist_size)
+
+
+def playlist_rows(result: Any) -> List[Dict[str, Any]]:
+    rows = []
+    for idx, song in enumerate(result.playlist, start=1):
+        rows.append(
+            {
+                "slot": idx,
+                "title": song["title"],
+                "artist": song["artist"],
+                "genre": song["genre"],
+                "mood": song["mood"],
+                "energy": song["energy"],
+            }
+        )
+    return rows
+
+
+def trace_rows(result: Any) -> List[Dict[str, Any]]:
+    rows = []
+    for step in result.trace:
+        rows.append(
+            {
+                "step": step.step,
+                "tool": step.tool,
+                "input_summary": step.input_summary,
+                "key_result": step.key_result,
+                "decision_rationale": step.decision_rationale,
             }
         )
     return rows
