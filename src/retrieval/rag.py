@@ -1,6 +1,7 @@
 from dataclasses import dataclass
+from pathlib import Path
 import re
-from typing import Dict, List, Sequence
+from typing import Dict, List, Sequence, Tuple
 
 
 @dataclass
@@ -11,6 +12,8 @@ class RetrievedContext:
     text: str
     source: str
     score: float
+    source_type: str = "catalog"
+    trust_level: float = 1.0
 
 
 class MusicContextRetriever:
@@ -42,6 +45,8 @@ class MusicContextRetriever:
                     ),
                     source="songs.csv",
                     score=0.0,
+                    source_type="catalog",
+                    trust_level=1.0,
                 )
             )
 
@@ -59,8 +64,40 @@ class MusicContextRetriever:
                     text=f"{artist} commonly appears with genres {genres} and moods {moods}.",
                     source="songs.csv",
                     score=0.0,
+                    source_type="catalog",
+                    trust_level=1.0,
                 )
             )
+
+        return cls(chunks)
+
+    @classmethod
+    def from_multi_source(
+        cls,
+        songs: List[Dict],
+        text_sources: Sequence[Tuple[str, str, float]],
+    ) -> "MusicContextRetriever":
+        base = cls.from_song_catalog(songs)
+        chunks = list(base._chunks)
+
+        for source_path, source_type, trust_level in text_sources:
+            path = Path(source_path)
+            if not path.exists():
+                continue
+
+            raw = path.read_text(encoding="utf-8")
+            paragraphs = [p.strip() for p in raw.split("\n\n") if p.strip()]
+            for idx, paragraph in enumerate(paragraphs, start=1):
+                chunks.append(
+                    RetrievedContext(
+                        chunk_id=f"{source_type}:{path.stem}:{idx}",
+                        text=paragraph,
+                        source=str(path).replace("\\", "/"),
+                        score=0.0,
+                        source_type=source_type,
+                        trust_level=float(trust_level),
+                    )
+                )
 
         return cls(chunks)
 
@@ -77,18 +114,41 @@ class MusicContextRetriever:
                 continue
 
             # Normalize by query size so tighter query matches rank higher.
-            score = overlap / max(len(query_tokens), 1)
+            lexical = overlap / max(len(query_tokens), 1)
+            score = lexical * _trust_weight(chunk.trust_level)
             scored.append(
                 RetrievedContext(
                     chunk_id=chunk.chunk_id,
                     text=chunk.text,
                     source=chunk.source,
                     score=score,
+                    source_type=chunk.source_type,
+                    trust_level=chunk.trust_level,
                 )
             )
 
         scored.sort(key=lambda c: c.score, reverse=True)
-        return scored[:top_k]
+
+        # Prefer source diversity when possible so multi-source setups
+        # can surface supporting evidence from custom data.
+        diversified: List[RetrievedContext] = []
+        seen_sources = set()
+        for ctx in scored:
+            if ctx.source in seen_sources:
+                continue
+            diversified.append(ctx)
+            seen_sources.add(ctx.source)
+            if len(diversified) >= top_k:
+                return diversified
+
+        for ctx in scored:
+            if len(diversified) >= top_k:
+                break
+            if ctx in diversified:
+                continue
+            diversified.append(ctx)
+
+        return diversified
 
 
 def build_query_from_user_prefs(user_prefs: Dict) -> str:
@@ -110,3 +170,8 @@ def format_context_citations(contexts: Sequence[RetrievedContext]) -> str:
 
 def _tokenize(text: str) -> set:
     return set(re.findall(r"[a-zA-Z0-9]+", text.lower()))
+
+
+def _trust_weight(trust_level: float) -> float:
+    bounded = max(0.1, min(1.0, trust_level))
+    return 0.75 + (0.25 * bounded)
