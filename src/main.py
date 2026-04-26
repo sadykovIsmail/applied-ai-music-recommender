@@ -6,6 +6,7 @@ Run from the project root:
 """
 
 import os
+from src.config import GeminiConfig
 from src.recommender import load_songs, recommend_songs_with_rag
 from src.retrieval import MusicContextRetriever
 
@@ -23,6 +24,12 @@ def print_recommendations(profile_name: str, recommendations) -> None:
 
 
 def main() -> None:
+    gemini = GeminiConfig.from_env()
+    if gemini.is_configured:
+        print(f"Gemini config loaded for class '{gemini.class_name}' using model '{gemini.model}'.")
+    else:
+        print("Gemini API key not set yet. Running with local retrieval mode.")
+
     csv_path = os.path.join("data", "songs.csv")
     songs = load_songs(csv_path)
     retriever = MusicContextRetriever.from_song_catalog(songs)

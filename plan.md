@@ -30,12 +30,18 @@
 - [ ] `scripts/` (test harness + utility scripts)
 - [ ] `assets/` (diagram PNG and presentation artifacts)
 - [ ] Add config file for model/provider settings and feature flags
+- [ ] Add Gemini provider config class (`GeminiConfig`) and load settings from `.env`
+- [ ] Add `.env` variables for Gemini integration:
+- [ ] `GEMINI_API_KEY`
+- [ ] `GEMINI_MODEL`
+- [ ] `GEMINI_CLASS_NAME`
 - [ ] Define logging format and output location (`logs/` or structured console JSON)
 
 Acceptance criteria
 - [ ] Baseline behavior is reproducible
 - [ ] New folders and config conventions are in place
 - [ ] Team can run one command to launch the app in baseline mode
+- [ ] App can detect whether Gemini API key is configured and print safe startup status
 
 ---
 
@@ -58,6 +64,8 @@ Acceptance criteria
 ### 1.2 RAG Integration in Recommender
 - [ ] Update recommendation flow to retrieve context before generation
 - [ ] Pass retrieved context into model prompt template
+- [ ] If Gemini API key is present, route prompt+context into Gemini generation path
+- [ ] If Gemini API key is missing, fallback to local retrieval explanation mode
 - [ ] Ensure output includes rationale linked to retrieved evidence
 - [ ] Add fallback behavior when retrieval returns low-quality/no results
 
