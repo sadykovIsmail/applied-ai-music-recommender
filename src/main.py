@@ -6,6 +6,9 @@ Run from the project root:
 """
 
 import os
+import json
+from pathlib import Path
+from src.agent import AIDJAgent
 from src.config import GeminiConfig
 from src.recommender import load_songs, recommend_songs_with_rag
 from src.retrieval import MusicContextRetriever
@@ -23,6 +26,46 @@ def print_recommendations(profile_name: str, recommendations) -> None:
         print(f"     Why:   {explanation}")
 
 
+def print_agent_playlist(result) -> None:
+    print(f"\n{'-' * 52}")
+    print("  AI DJ Agent Playlist")
+    print(f"{'-' * 52}")
+
+    for i, song in enumerate(result.playlist, 1):
+        print(f"  {i}. {song['title']} by {song['artist']} ({song['genre']}, energy={song['energy']:.2f})")
+
+    if result.warnings:
+        print("  Warnings:")
+        for warning in result.warnings:
+            print(f"   - {warning}")
+
+    print("  Trace:")
+    for step in result.trace:
+        print(f"   - step={step.step} tool={step.tool} result={step.key_result}")
+
+
+def save_agent_trace(result, output_path: str = "outputs/agent_trace_demo.json") -> None:
+    out = Path(output_path)
+    out.parent.mkdir(parents=True, exist_ok=True)
+
+    payload = {
+        "revised": result.revised,
+        "warnings": result.warnings,
+        "max_energy_jump_seen": result.max_energy_jump_seen,
+        "trace": [
+            {
+                "step": step.step,
+                "tool": step.tool,
+                "input_summary": step.input_summary,
+                "key_result": step.key_result,
+                "decision_rationale": step.decision_rationale,
+            }
+            for step in result.trace
+        ],
+    }
+    out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
 def main() -> None:
     gemini = GeminiConfig.from_env()
     if gemini.is_configured:
@@ -32,7 +75,14 @@ def main() -> None:
 
     csv_path = os.path.join("data", "songs.csv")
     songs = load_songs(csv_path)
-    retriever = MusicContextRetriever.from_song_catalog(songs)
+    retriever = MusicContextRetriever.from_multi_source(
+        songs=songs,
+        text_sources=[
+            ("data/artist_context.md", "artist_notes", 0.9),
+            ("data/genre_notes.md", "genre_notes", 0.8),
+        ],
+    )
+    agent = AIDJAgent(songs=songs, retriever=retriever)
     print(f"Loaded {len(songs)} songs.")
 
     profiles = [
@@ -57,6 +107,11 @@ def main() -> None:
     for name, prefs in profiles:
         recs = recommend_songs_with_rag(prefs, songs, retriever, k=5, context_k=2)
         print_recommendations(name, recs)
+
+    # Agentic workflow demo run for observable planning/execution/evaluation trace.
+    agent_result = agent.run(user_intent={"genre": "lofi", "mood": "chill", "energy": 0.38}, playlist_size=5)
+    print_agent_playlist(agent_result)
+    save_agent_trace(agent_result)
 
     print(f"\n{'=' * 52}\n")
 
