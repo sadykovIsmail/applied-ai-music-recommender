@@ -1,0 +1,11 @@
+flowchart LR
+    U[User Request] --> A[AI DJ Agent Planner]
+    A --> T[Tool Calls]
+    T --> R[Retriever Multi-Source RAG]
+    R --> C[Context Pack]
+    C --> S[Specialized Prompt Layer]
+    S --> G[Generator or Recommender]
+    G --> E[Reliability Evaluator]
+    E --> O[Playlist and Explanations]
+    E --> L[Structured Logs]
+    E --> H[Test Harness Reports]
