@@ -2,6 +2,8 @@ import csv
 from typing import List, Dict, Tuple
 from dataclasses import dataclass
 
+from src.retrieval import MusicContextRetriever, build_query_from_user_prefs, format_context_citations
+
 
 @dataclass
 class Song:
@@ -126,3 +128,24 @@ def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tup
         scored.append((song, s, explanation))
     scored.sort(key=lambda x: x[1], reverse=True)
     return scored[:k]
+
+
+def recommend_songs_with_rag(
+    user_prefs: Dict,
+    songs: List[Dict],
+    retriever: MusicContextRetriever,
+    k: int = 5,
+    context_k: int = 2,
+) -> List[Tuple[Dict, float, str]]:
+    """Return top-k recommendations with retrieval-grounded explanation and citations."""
+    ranked = recommend_songs(user_prefs, songs, k=k)
+    query = build_query_from_user_prefs(user_prefs)
+    contexts = retriever.retrieve(query, top_k=context_k)
+    citation_line = format_context_citations(contexts)
+
+    grounded = []
+    for song, score, explanation in ranked:
+        rag_explanation = f"{explanation}; {citation_line}"
+        grounded.append((song, score, rag_explanation))
+
+    return grounded

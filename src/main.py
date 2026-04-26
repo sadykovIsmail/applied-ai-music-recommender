@@ -6,7 +6,8 @@ Run from the project root:
 """
 
 import os
-from src.recommender import load_songs, recommend_songs
+from src.recommender import load_songs, recommend_songs_with_rag
+from src.retrieval import MusicContextRetriever
 
 
 def print_recommendations(profile_name: str, recommendations) -> None:
@@ -24,6 +25,7 @@ def print_recommendations(profile_name: str, recommendations) -> None:
 def main() -> None:
     csv_path = os.path.join("data", "songs.csv")
     songs = load_songs(csv_path)
+    retriever = MusicContextRetriever.from_song_catalog(songs)
     print(f"Loaded {len(songs)} songs.")
 
     profiles = [
@@ -46,7 +48,7 @@ def main() -> None:
     ]
 
     for name, prefs in profiles:
-        recs = recommend_songs(prefs, songs, k=5)
+        recs = recommend_songs_with_rag(prefs, songs, retriever, k=5, context_k=2)
         print_recommendations(name, recs)
 
     print(f"\n{'=' * 52}\n")
