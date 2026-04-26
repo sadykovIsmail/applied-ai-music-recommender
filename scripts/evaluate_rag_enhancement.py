@@ -27,8 +27,8 @@ def compare_single_vs_multi_source(
         single_contexts = single.retrieve(query, top_k=context_k)
         multi_contexts = multi.retrieve(query, top_k=context_k)
 
-        single_uniques.append(len({ctx.source for ctx in single_contexts}))
-        multi_uniques.append(len({ctx.source for ctx in multi_contexts}))
+        single_uniques.append(_count_unique_sources(single_contexts))
+        multi_uniques.append(_count_unique_sources(multi_contexts))
 
     single_avg = _avg(single_uniques)
     multi_avg = _avg(multi_uniques)
@@ -77,6 +77,10 @@ def _avg(values: List[int]) -> float:
     if not values:
         return 0.0
     return sum(values) / len(values)
+
+
+def _count_unique_sources(contexts) -> int:
+    return len({ctx.source for ctx in contexts})
 
 
 def _to_markdown(report: Dict) -> str:

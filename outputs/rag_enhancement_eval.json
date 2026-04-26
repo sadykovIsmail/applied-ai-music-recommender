@@ -1,0 +1,16 @@
+{
+  "profiles_evaluated": 3,
+  "single_source": {
+    "avg_unique_sources": 1.0
+  },
+  "multi_source": {
+    "avg_unique_sources": 3.0
+  },
+  "delta": {
+    "avg_unique_sources": 2.0
+  },
+  "params": {
+    "k": 3,
+    "context_k": 4
+  }
+}
