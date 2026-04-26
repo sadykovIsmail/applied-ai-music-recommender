@@ -1,0 +1,561 @@
+{
+  "gemini_configured": true,
+  "mode": "vinyl_historian",
+  "profiles": [
+    {
+      "profile_name": "High-Energy Pop Fan",
+      "user_prefs": {
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.85
+      },
+      "recommendations": [
+        {
+          "song": {
+            "id": 1,
+            "title": "Sunrise City",
+            "artist": "Neon Echo",
+            "genre": "pop",
+            "mood": "happy",
+            "energy": 0.82,
+            "tempo_bpm": 118.0,
+            "valence": 0.84,
+            "danceability": 0.79,
+            "acousticness": 0.18
+          },
+          "score": 3.9699999999999998,
+          "explanation": "genre match: pop (+2.0); mood match: happy (+1.0); energy proximity: 0.97; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]"
+        },
+        {
+          "song": {
+            "id": 5,
+            "title": "Gym Hero",
+            "artist": "Max Pulse",
+            "genre": "pop",
+            "mood": "intense",
+            "energy": 0.93,
+            "tempo_bpm": 132.0,
+            "valence": 0.77,
+            "danceability": 0.88,
+            "acousticness": 0.05
+          },
+          "score": 2.92,
+          "explanation": "genre match: pop (+2.0); energy proximity: 0.92; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]"
+        },
+        {
+          "song": {
+            "id": 15,
+            "title": "Uptown Funk Revival",
+            "artist": "Groove Theory",
+            "genre": "funk",
+            "mood": "happy",
+            "energy": 0.87,
+            "tempo_bpm": 122.0,
+            "valence": 0.85,
+            "danceability": 0.91,
+            "acousticness": 0.15
+          },
+          "score": 1.98,
+          "explanation": "mood match: happy (+1.0); energy proximity: 0.98; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]"
+        },
+        {
+          "song": {
+            "id": 20,
+            "title": "Roaring Sunrise",
+            "artist": "Voltline",
+            "genre": "rock",
+            "mood": "happy",
+            "energy": 0.8,
+            "tempo_bpm": 142.0,
+            "valence": 0.69,
+            "danceability": 0.72,
+            "acousticness": 0.18
+          },
+          "score": 1.9500000000000002,
+          "explanation": "mood match: happy (+1.0); energy proximity: 0.95; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]"
+        },
+        {
+          "song": {
+            "id": 10,
+            "title": "Rooftop Lights",
+            "artist": "Indigo Parade",
+            "genre": "indie pop",
+            "mood": "happy",
+            "energy": 0.76,
+            "tempo_bpm": 124.0,
+            "valence": 0.81,
+            "danceability": 0.82,
+            "acousticness": 0.35
+          },
+          "score": 1.9100000000000001,
+          "explanation": "mood match: happy (+1.0); energy proximity: 0.91; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]"
+        }
+      ],
+      "contexts": [
+        {
+          "chunk_id": "song:1",
+          "source": "songs.csv",
+          "score": 0.8,
+          "source_type": "catalog",
+          "trust_level": 1.0
+        },
+        {
+          "chunk_id": "artist_notes:artist_context:1",
+          "source": "data/artist_context.md",
+          "score": 0.195,
+          "source_type": "artist_notes",
+          "trust_level": 0.9
+        }
+      ],
+      "standard_text": "Profile: High-Energy Pop Fan\n1. Sunrise City by Neon Echo (pop) score=3.97\n   why: genre match: pop (+2.0); mood match: happy (+1.0); energy proximity: 0.97; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]\n2. Gym Hero by Max Pulse (pop) score=2.92\n   why: genre match: pop (+2.0); energy proximity: 0.92; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]\n3. Uptown Funk Revival by Groove Theory (funk) score=1.98\n   why: mood match: happy (+1.0); energy proximity: 0.98; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]\n4. Roaring Sunrise by Voltline (rock) score=1.95\n   why: mood match: happy (+1.0); energy proximity: 0.95; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]\n5. Rooftop Lights by Indigo Parade (indie pop) score=1.91\n   why: mood match: happy (+1.0); energy proximity: 0.91; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20]",
+      "specialized_text": "VINYL HISTORIAN // CURATION NOTE\nPersona: Analog-first archivist for High-Energy Pop Fan\nCuration Rules: preserve mood arc; prioritize era texture; avoid abrupt energy leaps\nPicks:\nFew-shot pattern:\n- Example pick format: [Era Guess] Title - rationale - Constraint Check: PASS\n- [Mid-Tempo Vinyl Era] 1. Sunrise City by Neon Echo | Rationale: genre match: pop (+2.0); mood match: happy (+1.0); energy proximity: 0.97; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 2. Gym Hero by Max Pulse | Rationale: genre match: pop (+2.0); energy proximity: 0.92; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 3. Uptown Funk Revival by Groove Theory | Rationale: mood match: happy (+1.0); energy proximity: 0.98; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 4. Roaring Sunrise by Voltline | Rationale: mood match: happy (+1.0); energy proximity: 0.95; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 5. Rooftop Lights by Indigo Parade | Rationale: mood match: happy (+1.0); energy proximity: 0.91; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\nConstraint Check: PASS",
+      "final_text": "VINYL HISTORIAN // CURATION NOTE\nPersona: Analog-first archivist for High-Energy Pop Fan\nCuration Rules: preserve mood arc; prioritize era texture; avoid abrupt energy leaps\nPicks:\nFew-shot pattern:\n- Example pick format: [Era Guess] Title - rationale - Constraint Check: PASS\n- [Mid-Tempo Vinyl Era] 1. Sunrise City by Neon Echo | Rationale: genre match: pop (+2.0); mood match: happy (+1.0); energy proximity: 0.97; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 2. Gym Hero by Max Pulse | Rationale: genre match: pop (+2.0); energy proximity: 0.92; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 3. Uptown Funk Revival by Groove Theory | Rationale: mood match: happy (+1.0); energy proximity: 0.98; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 4. Roaring Sunrise by Voltline | Rationale: mood match: happy (+1.0); energy proximity: 0.95; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 5. Rooftop Lights by Indigo Parade | Rationale: mood match: happy (+1.0); energy proximity: 0.91; Sources: [song:1 via songs.csv, score=0.80], [artist_notes:artist_context:1 via data/artist_context.md, score=0.20] | Constraint Check: PASS\nConstraint Check: PASS",
+      "diagnostics": {
+        "status": "ok",
+        "confidence_score": 0.791,
+        "retrieval_confidence": 0.498,
+        "rule_compliance_confidence": 0.874,
+        "generation_confidence": 1.0,
+        "warnings": [],
+        "fallback_used": false,
+        "logs": [
+          {
+            "level": "INFO",
+            "message": "Retrieved context for recommendation run.",
+            "context": {
+              "query": "pop happy energy 0.85",
+              "contexts": 2
+            }
+          },
+          {
+            "level": "INFO",
+            "message": "Rendered recommendation outputs.",
+            "context": {
+              "mode": "vinyl_historian",
+              "generation_confidence": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "profile_name": "Chill Lofi Listener",
+      "user_prefs": {
+        "genre": "lofi",
+        "mood": "chill",
+        "energy": 0.38
+      },
+      "recommendations": [
+        {
+          "song": {
+            "id": 4,
+            "title": "Library Rain",
+            "artist": "Paper Lanterns",
+            "genre": "lofi",
+            "mood": "chill",
+            "energy": 0.35,
+            "tempo_bpm": 72.0,
+            "valence": 0.6,
+            "danceability": 0.58,
+            "acousticness": 0.86
+          },
+          "score": 3.9699999999999998,
+          "explanation": "genre match: lofi (+2.0); mood match: chill (+1.0); energy proximity: 0.97; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]"
+        },
+        {
+          "song": {
+            "id": 2,
+            "title": "Midnight Coding",
+            "artist": "LoRoom",
+            "genre": "lofi",
+            "mood": "chill",
+            "energy": 0.42,
+            "tempo_bpm": 78.0,
+            "valence": 0.56,
+            "danceability": 0.62,
+            "acousticness": 0.71
+          },
+          "score": 3.96,
+          "explanation": "genre match: lofi (+2.0); mood match: chill (+1.0); energy proximity: 0.96; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]"
+        },
+        {
+          "song": {
+            "id": 9,
+            "title": "Focus Flow",
+            "artist": "LoRoom",
+            "genre": "lofi",
+            "mood": "focused",
+            "energy": 0.4,
+            "tempo_bpm": 80.0,
+            "valence": 0.59,
+            "danceability": 0.6,
+            "acousticness": 0.78
+          },
+          "score": 2.98,
+          "explanation": "genre match: lofi (+2.0); energy proximity: 0.98; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]"
+        },
+        {
+          "song": {
+            "id": 6,
+            "title": "Spacewalk Thoughts",
+            "artist": "Orbit Bloom",
+            "genre": "ambient",
+            "mood": "chill",
+            "energy": 0.28,
+            "tempo_bpm": 60.0,
+            "valence": 0.65,
+            "danceability": 0.41,
+            "acousticness": 0.92
+          },
+          "score": 1.9,
+          "explanation": "mood match: chill (+1.0); energy proximity: 0.90; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]"
+        },
+        {
+          "song": {
+            "id": 7,
+            "title": "Coffee Shop Stories",
+            "artist": "Slow Stereo",
+            "genre": "jazz",
+            "mood": "relaxed",
+            "energy": 0.37,
+            "tempo_bpm": 90.0,
+            "valence": 0.71,
+            "danceability": 0.54,
+            "acousticness": 0.89
+          },
+          "score": 0.99,
+          "explanation": "energy proximity: 0.99; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]"
+        }
+      ],
+      "contexts": [
+        {
+          "chunk_id": "song:2",
+          "source": "songs.csv",
+          "score": 0.8,
+          "source_type": "catalog",
+          "trust_level": 1.0
+        },
+        {
+          "chunk_id": "genre_notes:genre_notes:2",
+          "source": "data/genre_notes.md",
+          "score": 0.38,
+          "source_type": "genre_notes",
+          "trust_level": 0.8
+        }
+      ],
+      "standard_text": "Profile: Chill Lofi Listener\n1. Library Rain by Paper Lanterns (lofi) score=3.97\n   why: genre match: lofi (+2.0); mood match: chill (+1.0); energy proximity: 0.97; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]\n2. Midnight Coding by LoRoom (lofi) score=3.96\n   why: genre match: lofi (+2.0); mood match: chill (+1.0); energy proximity: 0.96; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]\n3. Focus Flow by LoRoom (lofi) score=2.98\n   why: genre match: lofi (+2.0); energy proximity: 0.98; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]\n4. Spacewalk Thoughts by Orbit Bloom (ambient) score=1.90\n   why: mood match: chill (+1.0); energy proximity: 0.90; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]\n5. Coffee Shop Stories by Slow Stereo (jazz) score=0.99\n   why: energy proximity: 0.99; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38]",
+      "specialized_text": "VINYL HISTORIAN // CURATION NOTE\nPersona: Analog-first archivist for Chill Lofi Listener\nCuration Rules: preserve mood arc; prioritize era texture; avoid abrupt energy leaps\nPicks:\nFew-shot pattern:\n- Example pick format: [Era Guess] Title - rationale - Constraint Check: PASS\n- [Late-Night Tape Era] 1. Library Rain by Paper Lanterns | Rationale: genre match: lofi (+2.0); mood match: chill (+1.0); energy proximity: 0.97; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\n- [Late-Night Tape Era] 2. Midnight Coding by LoRoom | Rationale: genre match: lofi (+2.0); mood match: chill (+1.0); energy proximity: 0.96; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\n- [Late-Night Tape Era] 3. Focus Flow by LoRoom | Rationale: genre match: lofi (+2.0); energy proximity: 0.98; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\n- [Late-Night Tape Era] 4. Spacewalk Thoughts by Orbit Bloom | Rationale: mood match: chill (+1.0); energy proximity: 0.90; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\n- [Mid-Tempo Vinyl Era] 5. Coffee Shop Stories by Slow Stereo | Rationale: energy proximity: 0.99; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\nConstraint Check: PASS",
+      "final_text": "VINYL HISTORIAN // CURATION NOTE\nPersona: Analog-first archivist for Chill Lofi Listener\nCuration Rules: preserve mood arc; prioritize era texture; avoid abrupt energy leaps\nPicks:\nFew-shot pattern:\n- Example pick format: [Era Guess] Title - rationale - Constraint Check: PASS\n- [Late-Night Tape Era] 1. Library Rain by Paper Lanterns | Rationale: genre match: lofi (+2.0); mood match: chill (+1.0); energy proximity: 0.97; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\n- [Late-Night Tape Era] 2. Midnight Coding by LoRoom | Rationale: genre match: lofi (+2.0); mood match: chill (+1.0); energy proximity: 0.96; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\n- [Late-Night Tape Era] 3. Focus Flow by LoRoom | Rationale: genre match: lofi (+2.0); energy proximity: 0.98; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\n- [Late-Night Tape Era] 4. Spacewalk Thoughts by Orbit Bloom | Rationale: mood match: chill (+1.0); energy proximity: 0.90; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\n- [Mid-Tempo Vinyl Era] 5. Coffee Shop Stories by Slow Stereo | Rationale: energy proximity: 0.99; Sources: [song:2 via songs.csv, score=0.80], [genre_notes:genre_notes:2 via data/genre_notes.md, score=0.38] | Constraint Check: PASS\nConstraint Check: PASS",
+      "diagnostics": {
+        "status": "ok",
+        "confidence_score": 0.841,
+        "retrieval_confidence": 0.59,
+        "rule_compliance_confidence": 0.934,
+        "generation_confidence": 1.0,
+        "warnings": [],
+        "fallback_used": false,
+        "logs": [
+          {
+            "level": "INFO",
+            "message": "Retrieved context for recommendation run.",
+            "context": {
+              "query": "lofi chill energy 0.38",
+              "contexts": 2
+            }
+          },
+          {
+            "level": "INFO",
+            "message": "Rendered recommendation outputs.",
+            "context": {
+              "mode": "vinyl_historian",
+              "generation_confidence": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "profile_name": "Deep Intense Rock",
+      "user_prefs": {
+        "genre": "rock",
+        "mood": "intense",
+        "energy": 0.92
+      },
+      "recommendations": [
+        {
+          "song": {
+            "id": 3,
+            "title": "Storm Runner",
+            "artist": "Voltline",
+            "genre": "rock",
+            "mood": "intense",
+            "energy": 0.91,
+            "tempo_bpm": 152.0,
+            "valence": 0.48,
+            "danceability": 0.66,
+            "acousticness": 0.1
+          },
+          "score": 3.99,
+          "explanation": "genre match: rock (+2.0); mood match: intense (+1.0); energy proximity: 0.99; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]"
+        },
+        {
+          "song": {
+            "id": 20,
+            "title": "Roaring Sunrise",
+            "artist": "Voltline",
+            "genre": "rock",
+            "mood": "happy",
+            "energy": 0.8,
+            "tempo_bpm": 142.0,
+            "valence": 0.69,
+            "danceability": 0.72,
+            "acousticness": 0.18
+          },
+          "score": 2.88,
+          "explanation": "genre match: rock (+2.0); energy proximity: 0.88; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]"
+        },
+        {
+          "song": {
+            "id": 5,
+            "title": "Gym Hero",
+            "artist": "Max Pulse",
+            "genre": "pop",
+            "mood": "intense",
+            "energy": 0.93,
+            "tempo_bpm": 132.0,
+            "valence": 0.77,
+            "danceability": 0.88,
+            "acousticness": 0.05
+          },
+          "score": 1.99,
+          "explanation": "mood match: intense (+1.0); energy proximity: 0.99; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]"
+        },
+        {
+          "song": {
+            "id": 11,
+            "title": "Dark Metal Pulse",
+            "artist": "IronVault",
+            "genre": "metal",
+            "mood": "intense",
+            "energy": 0.95,
+            "tempo_bpm": 168.0,
+            "valence": 0.31,
+            "danceability": 0.55,
+            "acousticness": 0.08
+          },
+          "score": 1.9700000000000002,
+          "explanation": "mood match: intense (+1.0); energy proximity: 0.97; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]"
+        },
+        {
+          "song": {
+            "id": 13,
+            "title": "Trap Kingdom",
+            "artist": "StreetWave",
+            "genre": "hip-hop",
+            "mood": "intense",
+            "energy": 0.88,
+            "tempo_bpm": 140.0,
+            "valence": 0.52,
+            "danceability": 0.84,
+            "acousticness": 0.12
+          },
+          "score": 1.96,
+          "explanation": "mood match: intense (+1.0); energy proximity: 0.96; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]"
+        }
+      ],
+      "contexts": [
+        {
+          "chunk_id": "song:3",
+          "source": "songs.csv",
+          "score": 0.8,
+          "source_type": "catalog",
+          "trust_level": 1.0
+        },
+        {
+          "chunk_id": "artist_notes:artist_context:3",
+          "source": "data/artist_context.md",
+          "score": 0.585,
+          "source_type": "artist_notes",
+          "trust_level": 0.9
+        }
+      ],
+      "standard_text": "Profile: Deep Intense Rock\n1. Storm Runner by Voltline (rock) score=3.99\n   why: genre match: rock (+2.0); mood match: intense (+1.0); energy proximity: 0.99; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]\n2. Roaring Sunrise by Voltline (rock) score=2.88\n   why: genre match: rock (+2.0); energy proximity: 0.88; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]\n3. Gym Hero by Max Pulse (pop) score=1.99\n   why: mood match: intense (+1.0); energy proximity: 0.99; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]\n4. Dark Metal Pulse by IronVault (metal) score=1.97\n   why: mood match: intense (+1.0); energy proximity: 0.97; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]\n5. Trap Kingdom by StreetWave (hip-hop) score=1.96\n   why: mood match: intense (+1.0); energy proximity: 0.96; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58]",
+      "specialized_text": "VINYL HISTORIAN // CURATION NOTE\nPersona: Analog-first archivist for Deep Intense Rock\nCuration Rules: preserve mood arc; prioritize era texture; avoid abrupt energy leaps\nPicks:\nFew-shot pattern:\n- Example pick format: [Era Guess] Title - rationale - Constraint Check: PASS\n- [Festival Pressing Era] 1. Storm Runner by Voltline | Rationale: genre match: rock (+2.0); mood match: intense (+1.0); energy proximity: 0.99; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\n- [Festival Pressing Era] 2. Roaring Sunrise by Voltline | Rationale: genre match: rock (+2.0); energy proximity: 0.88; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\n- [Festival Pressing Era] 3. Gym Hero by Max Pulse | Rationale: mood match: intense (+1.0); energy proximity: 0.99; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\n- [Festival Pressing Era] 4. Dark Metal Pulse by IronVault | Rationale: mood match: intense (+1.0); energy proximity: 0.97; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\n- [Festival Pressing Era] 5. Trap Kingdom by StreetWave | Rationale: mood match: intense (+1.0); energy proximity: 0.96; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\nConstraint Check: PASS",
+      "final_text": "VINYL HISTORIAN // CURATION NOTE\nPersona: Analog-first archivist for Deep Intense Rock\nCuration Rules: preserve mood arc; prioritize era texture; avoid abrupt energy leaps\nPicks:\nFew-shot pattern:\n- Example pick format: [Era Guess] Title - rationale - Constraint Check: PASS\n- [Festival Pressing Era] 1. Storm Runner by Voltline | Rationale: genre match: rock (+2.0); mood match: intense (+1.0); energy proximity: 0.99; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\n- [Festival Pressing Era] 2. Roaring Sunrise by Voltline | Rationale: genre match: rock (+2.0); energy proximity: 0.88; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\n- [Festival Pressing Era] 3. Gym Hero by Max Pulse | Rationale: mood match: intense (+1.0); energy proximity: 0.99; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\n- [Festival Pressing Era] 4. Dark Metal Pulse by IronVault | Rationale: mood match: intense (+1.0); energy proximity: 0.97; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\n- [Festival Pressing Era] 5. Trap Kingdom by StreetWave | Rationale: mood match: intense (+1.0); energy proximity: 0.96; Sources: [song:3 via songs.csv, score=0.80], [artist_notes:artist_context:3 via data/artist_context.md, score=0.58] | Constraint Check: PASS\nConstraint Check: PASS",
+      "diagnostics": {
+        "status": "ok",
+        "confidence_score": 0.855,
+        "retrieval_confidence": 0.693,
+        "rule_compliance_confidence": 0.873,
+        "generation_confidence": 1.0,
+        "warnings": [],
+        "fallback_used": false,
+        "logs": [
+          {
+            "level": "INFO",
+            "message": "Retrieved context for recommendation run.",
+            "context": {
+              "query": "rock intense energy 0.92",
+              "contexts": 2
+            }
+          },
+          {
+            "level": "INFO",
+            "message": "Rendered recommendation outputs.",
+            "context": {
+              "mode": "vinyl_historian",
+              "generation_confidence": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "profile_name": "Edge Case: High-Energy but Sad (conflicting preferences)",
+      "user_prefs": {
+        "genre": "ambient",
+        "mood": "sad",
+        "energy": 0.9
+      },
+      "recommendations": [
+        {
+          "song": {
+            "id": 6,
+            "title": "Spacewalk Thoughts",
+            "artist": "Orbit Bloom",
+            "genre": "ambient",
+            "mood": "chill",
+            "energy": 0.28,
+            "tempo_bpm": 60.0,
+            "valence": 0.65,
+            "danceability": 0.41,
+            "acousticness": 0.92
+          },
+          "score": 2.38,
+          "explanation": "genre match: ambient (+2.0); energy proximity: 0.38; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]"
+        },
+        {
+          "song": {
+            "id": 14,
+            "title": "Ocean Meditation",
+            "artist": "Tidal Drift",
+            "genre": "ambient",
+            "mood": "peaceful",
+            "energy": 0.22,
+            "tempo_bpm": 55.0,
+            "valence": 0.7,
+            "danceability": 0.35,
+            "acousticness": 0.96
+          },
+          "score": 2.32,
+          "explanation": "genre match: ambient (+2.0); energy proximity: 0.32; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]"
+        },
+        {
+          "song": {
+            "id": 3,
+            "title": "Storm Runner",
+            "artist": "Voltline",
+            "genre": "rock",
+            "mood": "intense",
+            "energy": 0.91,
+            "tempo_bpm": 152.0,
+            "valence": 0.48,
+            "danceability": 0.66,
+            "acousticness": 0.1
+          },
+          "score": 0.99,
+          "explanation": "energy proximity: 0.99; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]"
+        },
+        {
+          "song": {
+            "id": 13,
+            "title": "Trap Kingdom",
+            "artist": "StreetWave",
+            "genre": "hip-hop",
+            "mood": "intense",
+            "energy": 0.88,
+            "tempo_bpm": 140.0,
+            "valence": 0.52,
+            "danceability": 0.84,
+            "acousticness": 0.12
+          },
+          "score": 0.98,
+          "explanation": "energy proximity: 0.98; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]"
+        },
+        {
+          "song": {
+            "id": 5,
+            "title": "Gym Hero",
+            "artist": "Max Pulse",
+            "genre": "pop",
+            "mood": "intense",
+            "energy": 0.93,
+            "tempo_bpm": 132.0,
+            "valence": 0.77,
+            "danceability": 0.88,
+            "acousticness": 0.05
+          },
+          "score": 0.97,
+          "explanation": "energy proximity: 0.97; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]"
+        }
+      ],
+      "contexts": [
+        {
+          "chunk_id": "song:6",
+          "source": "songs.csv",
+          "score": 0.6,
+          "source_type": "catalog",
+          "trust_level": 1.0
+        },
+        {
+          "chunk_id": "artist_notes:artist_context:3",
+          "source": "data/artist_context.md",
+          "score": 0.195,
+          "source_type": "artist_notes",
+          "trust_level": 0.9
+        }
+      ],
+      "standard_text": "Profile: Edge Case: High-Energy but Sad (conflicting preferences)\n1. Spacewalk Thoughts by Orbit Bloom (ambient) score=2.38\n   why: genre match: ambient (+2.0); energy proximity: 0.38; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]\n2. Ocean Meditation by Tidal Drift (ambient) score=2.32\n   why: genre match: ambient (+2.0); energy proximity: 0.32; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]\n3. Storm Runner by Voltline (rock) score=0.99\n   why: energy proximity: 0.99; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]\n4. Trap Kingdom by StreetWave (hip-hop) score=0.98\n   why: energy proximity: 0.98; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]\n5. Gym Hero by Max Pulse (pop) score=0.97\n   why: energy proximity: 0.97; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20]",
+      "specialized_text": "VINYL HISTORIAN // CURATION NOTE\nPersona: Analog-first archivist for Edge Case: High-Energy but Sad (conflicting preferences)\nCuration Rules: preserve mood arc; prioritize era texture; avoid abrupt energy leaps\nPicks:\nFew-shot pattern:\n- Example pick format: [Era Guess] Title - rationale - Constraint Check: PASS\n- [Late-Night Tape Era] 1. Spacewalk Thoughts by Orbit Bloom | Rationale: genre match: ambient (+2.0); energy proximity: 0.38; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Late-Night Tape Era] 2. Ocean Meditation by Tidal Drift | Rationale: genre match: ambient (+2.0); energy proximity: 0.32; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 3. Storm Runner by Voltline | Rationale: energy proximity: 0.99; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 4. Trap Kingdom by StreetWave | Rationale: energy proximity: 0.98; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 5. Gym Hero by Max Pulse | Rationale: energy proximity: 0.97; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\nConstraint Check: PASS",
+      "final_text": "VINYL HISTORIAN // CURATION NOTE\nPersona: Analog-first archivist for Edge Case: High-Energy but Sad (conflicting preferences)\nCuration Rules: preserve mood arc; prioritize era texture; avoid abrupt energy leaps\nPicks:\nFew-shot pattern:\n- Example pick format: [Era Guess] Title - rationale - Constraint Check: PASS\n- [Late-Night Tape Era] 1. Spacewalk Thoughts by Orbit Bloom | Rationale: genre match: ambient (+2.0); energy proximity: 0.38; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Late-Night Tape Era] 2. Ocean Meditation by Tidal Drift | Rationale: genre match: ambient (+2.0); energy proximity: 0.32; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 3. Storm Runner by Voltline | Rationale: energy proximity: 0.99; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 4. Trap Kingdom by StreetWave | Rationale: energy proximity: 0.98; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\n- [Festival Pressing Era] 5. Gym Hero by Max Pulse | Rationale: energy proximity: 0.97; Sources: [song:6 via songs.csv, score=0.60], [artist_notes:artist_context:3 via data/artist_context.md, score=0.20] | Constraint Check: PASS\nConstraint Check: PASS",
+      "diagnostics": {
+        "status": "ok",
+        "confidence_score": 0.676,
+        "retrieval_confidence": 0.397,
+        "rule_compliance_confidence": 0.632,
+        "generation_confidence": 1.0,
+        "warnings": [],
+        "fallback_used": false,
+        "logs": [
+          {
+            "level": "INFO",
+            "message": "Retrieved context for recommendation run.",
+            "context": {
+              "query": "ambient sad energy 0.9",
+              "contexts": 2
+            }
+          },
+          {
+            "level": "INFO",
+            "message": "Rendered recommendation outputs.",
+            "context": {
+              "mode": "vinyl_historian",
+              "generation_confidence": 1.0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "agent": {
+    "playlist_size": 5,
+    "revised": false,
+    "warnings": [],
+    "max_energy_jump_seen": 0.12
+  },
+  "summary": {
+    "profile_count": 4,
+    "average_confidence": 0.791,
+    "fallback_runs": 0
+  }
+}
