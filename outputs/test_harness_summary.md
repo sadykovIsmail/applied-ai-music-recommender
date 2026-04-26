@@ -7,8 +7,8 @@
 
 | Scenario | Status | Confidence | Latency (ms) | Fallback |
 |---|---|---:|---:|---|
-| happy_path_lofi | pass | 0.841 | 1.23 | no |
-| contradictory_preferences | pass | 0.673 | 0.88 | no |
-| invalid_energy_input | pass | 0.758 | 0.82 | no |
-| retrieval_failure | pass | 0.625 | 0.11 | no |
-| empty_catalog | pass | 0.333 | 0.06 | yes |
+| happy_path_lofi | pass | 0.841 | 1.44 | no |
+| contradictory_preferences | pass | 0.673 | 0.52 | no |
+| invalid_energy_input | pass | 0.758 | 0.45 | no |
+| retrieval_failure | pass | 0.625 | 0.09 | no |
+| empty_catalog | pass | 0.333 | 0.05 | yes |
