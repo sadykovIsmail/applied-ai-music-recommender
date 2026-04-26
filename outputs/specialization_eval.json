@@ -1,0 +1,12 @@
+{
+  "baseline": {
+    "schema_compliance_rate": 0.0
+  },
+  "specialized_few_shot": {
+    "schema_compliance_rate": 1.0
+  },
+  "delta": {
+    "schema_compliance_rate": 1.0
+  },
+  "profiles_evaluated": 3
+}

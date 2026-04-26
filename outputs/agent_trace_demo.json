@@ -1,0 +1,35 @@
+{
+  "revised": false,
+  "warnings": [],
+  "max_energy_jump_seen": 0.12,
+  "trace": [
+    {
+      "step": 1,
+      "tool": "planner",
+      "input_summary": "{'genre': 'lofi', 'mood': 'chill', 'energy': 0.38}",
+      "key_result": "playlist_size=5 genre=lofi",
+      "decision_rationale": "Turn user intent into executable recommendation constraints."
+    },
+    {
+      "step": 2,
+      "tool": "fetch_candidate_tracks",
+      "input_summary": "genre=lofi mood=chill energy=0.38",
+      "key_result": "candidates=15",
+      "decision_rationale": "Retrieve ranked candidates before flow validation."
+    },
+    {
+      "step": 3,
+      "tool": "energy_flow_checker",
+      "input_summary": "iteration=1 threshold=0.35",
+      "key_result": "max_jump=0.12",
+      "decision_rationale": "Check energy continuity between adjacent tracks."
+    },
+    {
+      "step": 5,
+      "tool": "genre_balance_checker",
+      "input_summary": "tracks=5",
+      "key_result": "balanced=True",
+      "decision_rationale": "Avoid over-concentration when alternatives exist."
+    }
+  ]
+}
