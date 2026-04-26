@@ -1,10 +1,14 @@
-# Music Recommender Simulation
+# VibeFinder: Applied AI Music Recommender
 
 ## Project Summary
 
 This project simulates a content-based music recommendation engine in Python. Given a user's taste profile — preferred genre, mood, and energy level — the system scores every song in a CSV catalog and returns the top-ranked matches along with a plain-language explanation for each result.
 
 The goal is to understand how real platforms like Spotify translate raw data (song attributes + listener preferences) into ranked suggestions, and to identify where simple algorithms succeed and where they introduce bias.
+
+## Base Project Lineage
+
+This final project extends my earlier Module 1 music recommender simulation, which originally focused on scoring songs by genre, mood, and energy and then returning the top-ranked results with a plain-language explanation. The original version was a CLI-first, rule-based prototype that demonstrated transparent recommendation logic, but it did not retrieve extra context, plan multi-step outputs, specialize its tone, or measure reliability in a structured way.
 
 ## Current Capabilities
 
@@ -13,10 +17,15 @@ The goal is to understand how real platforms like Spotify translate raw data (so
 - Specialized `vinyl_historian` persona mode with measurable comparison artifacts.
 - Reliability scoring, warning surfacing, graceful fallback behavior, and per-run diagnostics.
 - Automated harness coverage for happy-path, contradictory, invalid-input, retrieval-failure, and empty-catalog scenarios.
+- Streamlit showcase UI for live demos and Loom-friendly walkthroughs.
 
 ## System Architecture
 
 ![System architecture](assets/system-architecture.png)
+
+### Architecture Overview
+
+The system begins with a user preference profile and routes it through four major layers. The retrieval layer pulls grounded context from the song catalog plus custom artist and genre notes. The recommendation and agent layers score songs and, when needed, build a playlist with observable planning and revision steps. The specialization layer renders outputs in either a baseline voice or the constrained `vinyl_historian` persona. Finally, the reliability layer measures confidence, surfaces warnings, and records diagnostics and harness results so a reviewer can inspect both normal and edge-case behavior.
 
 ---
 
@@ -106,7 +115,13 @@ flowchart TD
    python -m src.main
    ```
 
-4. Run the automated reliability harness:
+4. Launch the showcase UI:
+
+   ```bash
+   streamlit run showcase_app.py
+   ```
+
+5. Run the automated reliability harness:
 
    ```bash
    python -m scripts.test_harness
@@ -127,6 +142,50 @@ Running the app and harness writes the following reviewer-facing outputs to `out
 - `specialization_demo.json`
 - `test_harness_results.json`
 - `test_harness_summary.md`
+
+---
+
+## Sample Interactions
+
+### Input 1: Chill Lofi Listener
+
+Input profile:
+
+```python
+{"genre": "lofi", "mood": "chill", "energy": 0.38}
+```
+
+Result:
+- Ranked recommendations center on `Library Rain`, `Midnight Coding`, and `Focus Flow`.
+- Retrieved citations include both `songs.csv` and `genre_notes.md`.
+- The specialized output shifts into the `vinyl_historian` voice while preserving the same ranked picks.
+- Reliability confidence is high and no fallback is used.
+
+### Input 2: Deep Intense Rock
+
+Input profile:
+
+```python
+{"genre": "rock", "mood": "intense", "energy": 0.92}
+```
+
+Result:
+- `Storm Runner` appears as the strongest match, followed by `Roaring Sunrise`.
+- The AI DJ agent can also use this type of profile to generate a multi-track playlist with energy-flow checks.
+- Confidence remains high because both ranking signals and retrieved context align well.
+
+### Input 3: Contradictory Edge Case
+
+Input profile:
+
+```python
+{"genre": "ambient", "mood": "sad", "energy": 0.90}
+```
+
+Result:
+- The system surfaces the tension between genre and energy rather than hiding it.
+- Recommendations still rank the closest catalog matches, but the reliability score is lower than the mainstream profiles.
+- This case is also reflected in the automated harness to show the system under contradictory constraints.
 
 ---
 
@@ -298,6 +357,36 @@ After temporarily doubling the energy weight and halving the genre weight, the r
 - **No collaborative signal:** There is no "other users who like X also liked Y" dimension. The system cannot discover unexpected connections.
 - **Binary category matching:** Genre and mood are exact-match strings. "indie pop" never matches "pop" even though they are closely related.
 - **Acoustic signal is weak:** The +0.3 / +0.5 acoustic bonus barely influences rankings compared to genre (+2.0).
+
+---
+
+## Design Decisions
+
+- I kept the original rule-based recommender rather than replacing it with a black-box model so the ranking logic stays transparent and easy to critique.
+- I used lexical multi-source retrieval instead of heavier vector infrastructure because the project goal is explainability and reproducibility in a lightweight classroom repo.
+- I implemented specialization as a constrained prompt-rendering layer so the difference from the baseline is measurable without needing proprietary fine-tuning infrastructure.
+- I added a reliability runner as a first-class module instead of an afterthought script so confidence, warnings, and fallback behavior meaningfully affect the main application flow.
+- I built the Streamlit showcase UI on top of saved artifacts so the demo surface stays stable and presentation-friendly even when I do not want to narrate raw terminal output.
+
+## Testing Summary
+
+- `python -m pytest -q` currently passes with 25 tests.
+- `python -m scripts.test_harness` runs 5 predefined scenarios and currently passes 5 out of 5.
+- Harness confidence averages `0.646`, with the strongest performance on the happy-path lofi profile and the lowest confidence on the empty-catalog fallback scenario.
+- Reliability diagnostics degrade gracefully on invalid input, missing retrieval context, and empty-catalog cases instead of crashing.
+
+## Loom Walkthrough
+
+- Showcase UI command: `streamlit run showcase_app.py`
+- Terminal demo command: `python -m src.main`
+- Harness demo command: `python -m scripts.test_harness`
+- Loom link: `ADD-LOOM-LINK-HERE`
+
+For the 5-7 minute walkthrough, show 2-3 profiles in the Streamlit UI, compare standard versus specialized output, open the reliability diagnostics for the edge case, and finish with the harness scoreboard.
+
+## Portfolio Reflection
+
+This project shows that I can take a small prototype, preserve what is explainable about it, and systematically grow it into a more trustworthy AI system with retrieval, multi-step reasoning, specialization, guardrails, testing, and presentation polish.
 
 ---
 

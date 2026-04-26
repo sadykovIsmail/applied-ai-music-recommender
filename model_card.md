@@ -112,3 +112,27 @@ The most surprising thing about building VibeFinder was how quickly the weight c
 Working on the bias analysis also made me rethink how I use Spotify. When the same two songs kept appearing at the top of every profile that included "rock," I realized that what feels like a sophisticated recommendation is often just the algorithm reflecting the composition of the catalog back at you. If there are only two rock songs available, a rock lover will only ever see those two, no matter how "smart" the rest of the logic is.
 
 The biggest limitation I'd prioritize for improvement is the exact-string genre matching. Music genres exist on a spectrum and overlap heavily in real life. Teaching the algorithm to recognize that "indie pop" is closer to "pop" than it is to "metal" would make a bigger practical difference than any weight tuning.
+
+---
+
+## 10. Misuse Risks and Guardrails
+
+The biggest misuse risk is over-trusting the system as though it were a production-grade music assistant. It is not. The catalog is tiny, the metadata is hand-curated, and the recommendation logic is intentionally simple. To reduce misuse, the repo documents that the system is a classroom artifact, includes visible confidence scores and warnings, and falls back gracefully when retrieval or generation evidence is weak rather than pretending certainty.
+
+Another misuse risk would be treating the specialized `vinyl_historian` tone as proof that the system is smarter or more accurate. The specialization layer is intentionally styled, not more factual by default. For that reason, the reliability layer keeps confidence scoring separate from persona rendering, and the harness tests failure paths where presentation quality could otherwise hide weak evidence.
+
+---
+
+## 11. Reliability Surprises
+
+The biggest surprise in testing was that a system can look polished while still being brittle underneath. The specialized output often sounded more convincing than the baseline, but that did not automatically mean it was better supported by evidence. That is why the project now separates persona styling from retrieval confidence and rule-compliance confidence.
+
+Another surprise was how much the contradictory edge case exposed hidden assumptions. A request for ambient music with very high energy showed that the original scoring system happily returned low-energy ambient tracks because the genre weight dominated everything else. Adding diagnostics made that weakness visible instead of burying it inside a smooth-looking recommendation list.
+
+---
+
+## 12. AI Collaboration Notes
+
+One helpful AI suggestion during the project was proposing a disciplined red-green workflow for each feature branch: write failing tests first, implement the feature, and then confirm measurable changes with saved artifacts. That structure made it much easier to keep the feature stack clean and reviewer-friendly.
+
+One flawed AI suggestion was effectively assuming that a more polished output format meant the system was already ready to demonstrate. In practice, the CLI entrypoint broke once while the underlying tests still passed. Catching that mismatch reminded me that AI-generated implementation ideas still need end-to-end verification, not just plausible-looking code.
