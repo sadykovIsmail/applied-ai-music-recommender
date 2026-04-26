@@ -1,8 +1,10 @@
 from src.showcase import (
+    build_chat_markdown,
     dashboard_metrics,
     ensure_showcase_artifacts,
     get_profile,
     harness_rows,
+    infer_profile_from_text,
     playlist_rows,
     profile_names,
     refresh_showcase_artifacts,
@@ -67,3 +69,26 @@ def test_run_live_agent_exposes_playlist_and_trace_rows():
     assert len(playlist) == 5
     assert len(trace) >= 3
     assert any(step["tool"] == "planner" for step in trace)
+
+
+def test_infer_profile_from_text_handles_natural_language_request():
+    parsed = infer_profile_from_text("I want chill lofi for late-night studying")
+
+    assert parsed["genre"] == "lofi"
+    assert parsed["energy"] > 0.0
+    assert parsed["mood"] in {"chill", "focused", "moody"}
+
+
+def test_build_chat_markdown_contains_confidence_and_specialized_text():
+    session = run_live_profile(
+        profile_name="Chat Mode",
+        prefs={"genre": "pop", "mood": "happy", "energy": 0.82},
+        mode="vinyl_historian",
+        use_few_shot=True,
+    )
+
+    content = build_chat_markdown(session)
+
+    assert "Confidence:" in content
+    assert "Specialized response:" in content
+    assert "VINYL HISTORIAN" in content

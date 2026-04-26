@@ -1,4 +1,5 @@
 import json
+import re
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List
@@ -201,5 +202,158 @@ def trace_rows(result: Any) -> List[Dict[str, Any]]:
     return rows
 
 
+def infer_profile_from_text(request_text: str) -> Dict[str, Any]:
+    runtime = get_runtime()
+    songs = runtime["songs"]
+    text = request_text.strip().lower()
+
+    genre_options = sorted(
+        {
+            str(song.get("genre", "")).strip().lower()
+            for song in songs
+            if str(song.get("genre", "")).strip()
+        },
+        key=len,
+        reverse=True,
+    )
+    mood_options = sorted(
+        {
+            str(song.get("mood", "")).strip().lower()
+            for song in songs
+            if str(song.get("mood", "")).strip()
+        },
+        key=len,
+        reverse=True,
+    )
+
+    genre = _match_option(text, genre_options) or _genre_synonym(text)
+    mood = _match_option(text, mood_options) or _mood_synonym(text)
+    energy = _infer_energy(text, genre=genre, mood=mood)
+
+    return {
+        "genre": genre or "",
+        "mood": mood or "",
+        "energy": energy,
+        "normalized_request": text,
+    }
+
+
+def build_chat_markdown(session: Any) -> str:
+    lines = [
+        f"### {session.profile_name}",
+        f"Confidence: `{session.diagnostics.confidence_score:.3f}`",
+        "",
+    ]
+
+    if session.recommendations:
+        lines.append("Top picks:")
+        for idx, (song, score, _) in enumerate(session.recommendations[:3], start=1):
+            lines.append(
+                f"- `{idx}.` **{song['title']}** by {song['artist']} "
+                f"({song['genre']}, {song['mood']}, energy {float(song['energy']):.2f}) "
+                f"`score={score:.2f}`"
+            )
+    else:
+        lines.append("No ranked picks were available.")
+
+    lines.extend(
+        [
+            "",
+            "Specialized response:",
+            "",
+            "```text",
+            session.final_text,
+            "```",
+        ]
+    )
+
+    return "\n".join(lines)
+
+
 def _load_json(path: Path) -> Dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _match_option(text: str, options: List[str]) -> str:
+    for option in options:
+        if option and option in text:
+            return option
+    return ""
+
+
+def _genre_synonym(text: str) -> str:
+    mapping = {
+        "study": "lofi",
+        "focus": "lofi",
+        "workout": "pop",
+        "club": "edm",
+        "electronic": "edm",
+        "metal": "metal",
+        "indie": "indie pop",
+        "calm": "ambient",
+    }
+    for token, genre in mapping.items():
+        if token in text:
+            return genre
+    return ""
+
+
+def _mood_synonym(text: str) -> str:
+    mapping = {
+        "study": "focused",
+        "focus": "focused",
+        "sad": "chill",
+        "relax": "relaxed",
+        "calm": "peaceful",
+        "party": "happy",
+        "workout": "intense",
+        "energetic": "intense",
+        "late night": "moody",
+    }
+    for token, mood in mapping.items():
+        if token in text:
+            return mood
+    return ""
+
+
+def _infer_energy(text: str, genre: str, mood: str) -> float:
+    explicit = re.search(r"(\d(?:\.\d+)?)", text)
+    if explicit:
+        raw = float(explicit.group(1))
+        if raw > 1.0:
+            raw = raw / 10.0 if raw <= 10 else 1.0
+        return max(0.0, min(1.0, raw))
+
+    if any(token in text for token in ["high energy", "energetic", "workout", "intense", "party", "pump"]):
+        return 0.88
+    if any(token in text for token in ["calm", "peaceful", "ambient", "sleep", "soft"]):
+        return 0.25
+    if any(token in text for token in ["chill", "lofi", "study", "relax"]):
+        return 0.38
+    if any(token in text for token in ["mid", "medium", "balanced"]):
+        return 0.55
+
+    genre_defaults = {
+        "lofi": 0.38,
+        "ambient": 0.25,
+        "rock": 0.88,
+        "pop": 0.80,
+        "edm": 0.92,
+        "jazz": 0.42,
+    }
+    if genre in genre_defaults:
+        return genre_defaults[genre]
+
+    mood_defaults = {
+        "intense": 0.90,
+        "happy": 0.78,
+        "focused": 0.42,
+        "chill": 0.36,
+        "relaxed": 0.34,
+        "peaceful": 0.24,
+        "moody": 0.62,
+    }
+    if mood in mood_defaults:
+        return mood_defaults[mood]
+
+    return 0.50
