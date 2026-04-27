@@ -1,7 +1,8 @@
 # VibeFinder: Applied AI Music Recommender
 
 ## Project Summary
-![Video](https://drive.google.com/file/d/1SVmGmaJEKpoEQZLt64wvvkgEZfynQ_HY/view?usp=sharing)
+**[🎥 Watch the VibeFinder Demo Video Here](https://drive.google.com/file/d/1SVmGmaJEKpoEQZLt64wvvkgEZfynQ_HY/view?usp=sharing)**
+
 This project simulates a content-based music recommendation engine in Python. Given a user's taste profile — preferred genre, mood, and energy level — the system scores every song in a CSV catalog and returns the top-ranked matches along with a plain-language explanation for each result.
 
 The goal is to understand how real platforms like Spotify translate raw data (song attributes + listener preferences) into ranked suggestions, and to identify where simple algorithms succeed and where they introduce bias.
@@ -380,7 +381,7 @@ After temporarily doubling the energy weight and halving the genre weight, the r
 - Showcase UI command: `streamlit run showcase_app.py`
 - Terminal demo command: `python -m src.main`
 - Harness demo command: `python -m scripts.test_harness`
-- Loom link: `https://drive.google.com/file/d/1SVmGmaJEKpoEQZLt64wvvkgEZfynQ_HY/view?usp=sharing`
+- **Demo Video:** [Click here to watch the full walkthrough](https://drive.google.com/file/d/1SVmGmaJEKpoEQZLt64wvvkgEZfynQ_HY/view?usp=sharing)
 
 For the 5-7 minute walkthrough, show 2-3 profiles in the Streamlit UI, compare standard versus specialized output, open the reliability diagnostics for the edge case, and finish with the harness scoreboard.
 
