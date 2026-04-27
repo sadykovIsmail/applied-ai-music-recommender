@@ -9,7 +9,7 @@
     {
       "name": "happy_path_lofi",
       "status": "pass",
-      "latency_ms": 1.44,
+      "latency_ms": 0.6,
       "confidence_score": 0.841,
       "warnings": [],
       "fallback_used": false,
@@ -23,7 +23,7 @@
     {
       "name": "contradictory_preferences",
       "status": "pass",
-      "latency_ms": 0.52,
+      "latency_ms": 0.54,
       "confidence_score": 0.673,
       "warnings": [],
       "fallback_used": false,
@@ -37,7 +37,7 @@
     {
       "name": "invalid_energy_input",
       "status": "pass",
-      "latency_ms": 0.45,
+      "latency_ms": 0.56,
       "confidence_score": 0.758,
       "warnings": [
         "Invalid energy value received; defaulted to 0.50."
@@ -53,7 +53,7 @@
     {
       "name": "retrieval_failure",
       "status": "pass",
-      "latency_ms": 0.09,
+      "latency_ms": 0.1,
       "confidence_score": 0.625,
       "warnings": [
         "Retrieval failure encountered; continuing with local ranking only. (simulated retrieval outage)"
